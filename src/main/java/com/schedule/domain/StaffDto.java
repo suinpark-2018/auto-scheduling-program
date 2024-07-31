@@ -24,13 +24,32 @@ public class StaffDto {
     String gender; // 성별
     String phone_num; // 휴대폰 번호
     String address; // 주소
-    String mail_auth; // 본인인증 여부
 
     // 시스템 컬럼 항목
     String reg_id; // 최초등록자
     String reg_date; // 최초 등록일
     String up_id; // 최종 수정자
     String up_date; // 최종 수정일
+
+    public StaffDto(String id, String name, String email, String pwd, String corp_code, String depart_code, String work_years, String grade, String preg_state, String work_state_code, String mng_auth, String is_active, String hire_date, String birth, String gender, String phone_num, String address) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.pwd = pwd;
+        this.corp_code = corp_code;
+        this.depart_code = depart_code;
+        this.work_years = work_years;
+        this.grade = grade;
+        this.preg_state = preg_state;
+        this.work_state_code = work_state_code;
+        this.mng_auth = mng_auth;
+        this.is_active = is_active;
+        this.hire_date = hire_date;
+        this.birth = birth;
+        this.gender = gender;
+        this.phone_num = phone_num;
+        this.address = address;
+    }
 
     public String getId() {
         return id;
@@ -216,14 +235,6 @@ public class StaffDto {
         this.address = address;
     }
 
-    public String getMail_auth() {
-        return mail_auth;
-    }
-
-    public void setMail_auth(String mail_auth) {
-        this.mail_auth = mail_auth;
-    }
-
     public String getReg_id() {
         return reg_id;
     }
@@ -282,7 +293,6 @@ public class StaffDto {
                 ", gender='" + gender + '\'' +
                 ", phone_num='" + phone_num + '\'' +
                 ", address='" + address + '\'' +
-                ", mail_auth='" + mail_auth + '\'' +
                 ", reg_id='" + reg_id + '\'' +
                 ", reg_date='" + reg_date + '\'' +
                 ", up_id='" + up_id + '\'' +
