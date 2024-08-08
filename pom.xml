@@ -116,6 +116,13 @@
           <scope>test</scope>
       </dependency>
 
+    <!-- 자바 라이브러리 - Lombok 추가 -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+      <scope>provided</scope>
+    </dependency>
 
   </dependencies>
 
