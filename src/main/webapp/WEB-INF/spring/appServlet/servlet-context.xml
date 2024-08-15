@@ -9,12 +9,12 @@
 
     <!-- spring MVC 처리를 위한 annotation tag -->
     <!-- Spring MVC 에서 annotation 을 사용하여 설정된 컨트롤러, 핸들러 매핑, 기타 구성 요소들을 활성화 (@Controller, @RequestMapping 등) -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
 
-    <mvc:resources mapping="/**" location="/resources"/>
+    <mvc:resources mapping="/resources/**" location="/resources/" />
 
     <!-- Spring MVC 에서 설정된 URL 패턴이 아닌 모든 요청을 기본 서블릿으로 포워딩. 정적 리소스(이미지, CSS 파일 등)에 대한 요청 처리 시 유용 -->
-    <mvc:default-servlet-handler />
+    <mvc:default-servlet-handler/>
 
     <!-- 지정된 패키지에서 Spring 빈으로 등록할 클래스를 자동으로 검색하고 등록
          주로 @Controller, @Service, @Repository 와 같은 어노테이션 붙은 클래스들 자동 등록 -->
