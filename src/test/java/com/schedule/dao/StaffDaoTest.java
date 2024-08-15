@@ -1,6 +1,6 @@
 package com.schedule.dao;
 
-import com.schedule.domain.StaffDto;
+import com.schedule.dto.StaffDto;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -36,19 +36,19 @@ class StaffDaoTest {
     @BeforeEach
     void setUpDB() throws Exception {
         for (int i = 1; i <= 10; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001",  "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
         for (int i = 11; i <= 20; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE02", "4", "Staff", "N", "WS0001", "N", "Y", "2021-03-02", "1999-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE02", "4", "Staff", "N", "WS0001",  "Y", "2021-03-02", "1999-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
         for (int i = 21; i <= 30; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE03", "5", "Staff", "N", "WS0001", "N", "Y", "2020-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE03", "5", "Staff", "N", "WS0001",  "Y", "2020-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
         for (int i = 31; i <= 40; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE04", "7", "Charge", "N", "WS0001", "N", "Y", "2018-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE04", "7", "Charge", "N", "WS0001",  "Y", "2018-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
     }
@@ -118,20 +118,20 @@ class StaffDaoTest {
         assertEquals(expectedCnt, actualCnt);
 
         // 임의의 staff 정보 1개 추가
-        StaffDto testDto1 = new StaffDto("12345", "name12345", "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+        StaffDto testDto1 = new StaffDto("12345", "name12345", "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
         staffDao.insert(testDto1);
         assertEquals(41, staffDao.count());
 
         // 임의의 staff 정보 10개 추가
         for (int i = 41; i <= 50; i++) {
-            StaffDto testDto2 = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto2 = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto2);
         }
         assertEquals(51, staffDao.count());
 
         // 임의의 staff 정보 100개 추가
         for (int i = 51; i <= 150; i++) {
-            StaffDto testDto3 = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto3 = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto3);
         }
         assertEquals(151, staffDao.count());
@@ -165,7 +165,7 @@ class StaffDaoTest {
         // 임의의 StaffDto 객체 생성
         // 데이터 저장 및 not null 확인
         // Case 1: 1개 추가 저장
-        StaffDto testDto = new StaffDto("12345", "name12345", "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+        StaffDto testDto = new StaffDto("12345", "name12345", "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
 
         // insert 성공여부 확인
         assertEquals(1, staffDao.insert(testDto));
@@ -179,7 +179,7 @@ class StaffDaoTest {
 
         // Case 2: 50개 추가 저장
         for (int i = 1; i <= 50; i++) {
-            StaffDto addTestDto = new StaffDto("addTest" + i, "addName" + i, "addTest" + i + "@spring.co.kr", "addPassword" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto addTestDto = new StaffDto("addTest" + i, "addName" + i, "addTest" + i + "@spring.co.kr", "addPassword" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(addTestDto);
         }
 
@@ -195,7 +195,7 @@ class StaffDaoTest {
     @DisplayName("DB 연결 실패로 인한 데이터 저장 실패")
     void failToDBConnection_insert() throws Exception {
         // 임의의 StaffDto 객체 생성
-        StaffDto testDto = new StaffDto("12345", "name12345", "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+        StaffDto testDto = new StaffDto("12345", "name12345", "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
 
         // count 메서드 호출 시 DB 접근 예외 발생시킴
         when(mockDao.insert(testDto)).thenThrow(new DataAccessException("Database connection error!") {});
@@ -206,7 +206,7 @@ class StaffDaoTest {
     @DisplayName("PK 중복인 경우 데이터 저장 실패 테스트")
     void failToInsert_DuplicatedPK() throws Exception {
         // 이미 테스트에 존재하는 정보가 저장된 테스트용 객체 testDto
-        StaffDto testDto = new StaffDto("1", "name1", "test" + 1 + "@spring.co.kr", "password" + 1, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+        StaffDto testDto = new StaffDto("1", "name1", "test" + 1 + "@spring.co.kr", "password" + 1, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
         assertThrows(DuplicateKeyException.class, () -> staffDao.insert(testDto));
     }
 
@@ -214,7 +214,7 @@ class StaffDaoTest {
     @DisplayName("NOT NULL로 설정된 항목 저장 누락 시 데이터 저장 실패")
     void failToInsert_NotNullColumn() throws Exception {
         // Not Null 항목 누락된 테스트용 객체 testDto
-        StaffDto testDto = new StaffDto("12345", null, "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+        StaffDto testDto = new StaffDto("12345", null, "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
         assertThrows(DataIntegrityViolationException.class, () -> staffDao.insert(testDto));
     }
 
@@ -223,7 +223,7 @@ class StaffDaoTest {
     void failToInsert_TypeLengthError() throws Exception {
         // 잘못된 타입으로 설정한 항목이 포함된 테스트용 객체 testDto
         // name 컬럼의 타입 길이는 varchar(20)으로 설정되어 있으며, 그 이상의 데이터 저장 시도 시 관련 예외 발생하는지 확인
-        StaffDto testDto = new StaffDto("12345", "name12345name56789name...", "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "N", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+        StaffDto testDto = new StaffDto("12345", "name12345name56789name...", "test" + 12345 + "@spring.co.kr", "password" + 12345, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
         assertThrows(DataIntegrityViolationException.class, () -> staffDao.insert(testDto));
     }
 

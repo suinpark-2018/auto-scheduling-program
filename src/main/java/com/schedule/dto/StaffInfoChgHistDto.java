@@ -1,12 +1,12 @@
-package com.schedule.domain;
+package com.schedule.dto;
 
-public class ShiftSchdArchDto {
+public class StaffInfoChgHistDto {
     String id; // 사번
     String name; // 직원명
-    String fix_duty; // 고정근무
-    String work_date; // 근무일자
-    String duty_code; // 근무유형 코드
-    String work_range; // 근무시간대
+    String chg_code; // 변경사항 코드
+    String bef_info; // 변경 전 정보
+    String af_info; // 변경 후 정보
+    String chg_date; // 변경일
 
     // 시스템 컬럼 항목
     String reg_id; // 최초등록자
@@ -30,36 +30,36 @@ public class ShiftSchdArchDto {
         this.name = name;
     }
 
-    public String getFix_duty() {
-        return fix_duty;
+    public String getChg_code() {
+        return chg_code;
     }
 
-    public void setFix_duty(String fix_duty) {
-        this.fix_duty = fix_duty;
+    public void setChg_code(String chg_code) {
+        this.chg_code = chg_code;
     }
 
-    public String getWork_date() {
-        return work_date;
+    public String getBef_info() {
+        return bef_info;
     }
 
-    public void setWork_date(String work_date) {
-        this.work_date = work_date;
+    public void setBef_info(String bef_info) {
+        this.bef_info = bef_info;
     }
 
-    public String getDuty_code() {
-        return duty_code;
+    public String getAf_info() {
+        return af_info;
     }
 
-    public void setDuty_code(String duty_code) {
-        this.duty_code = duty_code;
+    public void setAf_info(String af_info) {
+        this.af_info = af_info;
     }
 
-    public String getWork_range() {
-        return work_range;
+    public String getChg_date() {
+        return chg_date;
     }
 
-    public void setWork_range(String work_range) {
-        this.work_range = work_range;
+    public void setChg_date(String chg_date) {
+        this.chg_date = chg_date;
     }
 
     public String getReg_id() {
@@ -96,13 +96,13 @@ public class ShiftSchdArchDto {
 
     @Override
     public String toString() {
-        return "ShiftSchdArchDto{" +
+        return "StaffInfoChgHistDto{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", fix_duty='" + fix_duty + '\'' +
-                ", work_date='" + work_date + '\'' +
-                ", duty_code='" + duty_code + '\'' +
-                ", work_range='" + work_range + '\'' +
+                ", chg_code='" + chg_code + '\'' +
+                ", bef_info='" + bef_info + '\'' +
+                ", af_info='" + af_info + '\'' +
+                ", chg_date='" + chg_date + '\'' +
                 ", reg_id='" + reg_id + '\'' +
                 ", reg_date='" + reg_date + '\'' +
                 ", up_id='" + up_id + '\'' +

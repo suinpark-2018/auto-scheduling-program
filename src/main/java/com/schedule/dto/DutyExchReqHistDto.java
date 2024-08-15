@@ -1,4 +1,4 @@
-package com.schedule.domain;
+package com.schedule.dto;
 
 public class DutyExchReqHistDto {
     String exch_req_seq; // 신청 식별번호

@@ -1,4 +1,4 @@
-package com.schedule.domain;
+package com.schedule.dto;
 
 public class BoardDto {
     String id; // 공지자 아이디

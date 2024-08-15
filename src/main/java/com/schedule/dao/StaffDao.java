@@ -1,6 +1,6 @@
 package com.schedule.dao;
 
-import com.schedule.domain.StaffDto;
+import com.schedule.dto.StaffDto;
 
 import java.util.List;
 

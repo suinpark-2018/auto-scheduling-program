@@ -1,7 +1,7 @@
 package com.schedule.service;
 
 import com.schedule.dao.StaffDaoImpl;
-import com.schedule.domain.StaffDto;
+import com.schedule.dto.StaffDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -51,11 +51,10 @@ public class StaffServiceImpl implements StaffService {
     // 1.2.2.1. 존재하는 경우 중복여부 true로 반환
     // 1.2.2.2. 존재하지 않는 경우 중복여부 false로 반환
     @Override
-    public boolean checkDuplicatedId(StaffDto staffDto) {
+    public boolean checkDuplicatedId(String id) {
         boolean isDuplicated = true;
-        String inputId = staffDto.getId();
         try {
-            if (!checkExistOfId(inputId)) {
+            if (!checkExistOfId(id)) {
                 isDuplicated = false;
             }
         } catch (Exception e) {

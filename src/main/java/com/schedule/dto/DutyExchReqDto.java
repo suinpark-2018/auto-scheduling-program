@@ -1,4 +1,4 @@
-package com.schedule.domain;
+package com.schedule.dto;
 
 public class DutyExchReqDto {
     String req_staff_id; // 신청자 사번

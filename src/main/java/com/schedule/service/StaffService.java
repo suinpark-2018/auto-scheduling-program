@@ -1,6 +1,6 @@
 package com.schedule.service;
 
-import com.schedule.domain.StaffDto;
+import com.schedule.dto.StaffDto;
 
 public interface StaffService {
     // 1. 회원가입
@@ -17,7 +17,7 @@ public interface StaffService {
     // 1.2. 아이디 중복확인
     // 1.2.1. 사용자가 입력한 ID가 이미 존재하면 true 반환
     // 1.2.2. 사용자가 입력한 ID가 존재하지 않으면 false 반환
-    boolean checkDuplicatedId(StaffDto staffDto);
+    boolean checkDuplicatedId(String id);
 
     // 2. 로그인
     // 2.1. 아이디, 비밀번호 일치여부 확인

@@ -1,4 +1,4 @@
-package com.schedule.domain;
+package com.schedule.dto;
 
 public class CommonCodeDto {
     String code_id; // 코드유형 ID

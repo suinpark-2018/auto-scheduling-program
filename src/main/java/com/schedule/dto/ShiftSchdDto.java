@@ -1,4 +1,4 @@
-package com.schedule.domain;
+package com.schedule.dto;
 
 public class ShiftSchdDto {
     String id; // 사번
