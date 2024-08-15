@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="StaffDto" type="com.schedule.domain.StaffDto"/>
-        <typeAlias alias="StaffInfoChgHistDto" type="com.schedule.domain.StaffInfoChgHistDto"/>
+        <typeAlias alias="StaffDto" type="com.schedule.dto.StaffDto"/>
+        <typeAlias alias="StaffInfoChgHistDto" type="com.schedule.dto.StaffInfoChgHistDto"/>
     </typeAliases>
 </configuration>
