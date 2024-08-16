@@ -3,12 +3,14 @@ package com.schedule.service;
 import com.schedule.dao.StaffDaoImpl;
 import com.schedule.dto.StaffDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class StaffServiceImpl implements StaffService {
     private final StaffDaoImpl staffDao;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     // 1. 회원가입
     // 1.1. 직원정보 저장
@@ -18,6 +20,8 @@ public class StaffServiceImpl implements StaffService {
     public boolean saveStaffJoinInfo(StaffDto staffDto) {
         boolean isSaved = true;
         try {
+            String encodedPwd = passwordEncoder.encode(staffDto.getPwd());
+            staffDto.setPwd(encodedPwd);
             staffDao.insert(staffDto);
         } catch (Exception e) {
             isSaved = false;
@@ -78,7 +82,7 @@ public class StaffServiceImpl implements StaffService {
         try {
             if (checkExistOfId(inputId)) {
                 String dbPwd = staffDao.select(inputId).getPwd();
-                if (!inputPwd.equals(dbPwd)) {
+                if (!authenticatePwd(inputPwd, dbPwd)) {
                     isLoginMatch = false;
                 }
             } else {
@@ -90,5 +94,12 @@ public class StaffServiceImpl implements StaffService {
             e.getMessage();
         }
         return isLoginMatch;
+    }
+
+    // *** 암호화 전후 비밀번호 비교
+    // 암호화 전 비밀번호(rawPwd)와 암호화 후 비밀번호(encodedPwd)
+    // 일치 시 true / 불일치 시 false
+    public boolean authenticatePwd(String rawPwd, String encodedPwd) {
+        return passwordEncoder.matches(rawPwd, encodedPwd);
     }
 }

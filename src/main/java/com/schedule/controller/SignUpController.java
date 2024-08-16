@@ -6,6 +6,7 @@ import com.schedule.service.StaffServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SignUpController {
     private final StaffServiceImpl staffService;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/form")
     public String moveToRegisterPage() {
@@ -65,7 +67,6 @@ public class SignUpController {
         if (bindingResult.hasErrors()) {
             response.put("status", "error");
             response.put("message", bindingResult.getAllErrors().get(0).getDefaultMessage());
-
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } else {
             try {

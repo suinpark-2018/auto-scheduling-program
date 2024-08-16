@@ -17,28 +17,30 @@ class StaffServiceImplTest {
     @Autowired StaffServiceImpl staffService;
 
     // 테스트 전 DB 테이블에 더미데이터 추가
-    @BeforeEach
+//    @BeforeEach
+    @Test
     void setUpDB() throws Exception {
         for (int i = 1; i <= 10; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto("id" + i, "name", "test" + i + "@spring.co.kr", "Password1@", "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
         for (int i = 11; i <= 20; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE02", "4", "Staff", "N", "WS0001", "Y", "2021-03-02", "1999-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto("id" + i, "name", "test" + i + "@spring.co.kr", "Password1@", "CO01", "DE02", "4", "Staff", "N", "WS0001", "Y", "2021-03-02", "1999-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
         for (int i = 21; i <= 30; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE03", "5", "Staff", "N", "WS0001", "Y", "2020-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto("id" + i, "name", "test" + i + "@spring.co.kr", "Password1@", "CO02", "DE03", "5", "Staff", "N", "WS0001", "Y", "2020-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
         for (int i = 31; i <= 40; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE04", "7", "Charge", "N", "WS0001", "Y", "2018-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto("id" + i, "name", "test" + i + "@spring.co.kr", "Password1@", "CO02", "DE04", "7", "Charge", "N", "WS0001", "Y", "2018-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
     }
 
     // 테스트 종료 후 더미데이터 삭제
-    @AfterEach
+//    @AfterEach
+    @Test
     void cleanDB() throws Exception {
         staffDao.deleteAll();
     }
@@ -137,5 +139,25 @@ class StaffServiceImplTest {
         testDto.setPwd(inputPwd);
 
         assertFalse(staffService.validateStaffLogin(testDto));
+    }
+
+    @Test
+    @DisplayName("비밀번호 암호화 성공")
+    void successToEncodePwd() {
+        StaffDto testDto = new StaffDto("TestID", "name", "test" + "@spring.co.kr", "password", "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+        assertTrue(staffService.saveStaffJoinInfo(testDto));
+    }
+
+    @Test
+    @DisplayName("기존 비밀번호와 암호화된 비밀번호 비교 성공")
+    void successToAuthenticatePwd() {
+        String inputId = "TestID";
+        String inputPwd = "password";
+
+        StaffDto testDto = new StaffDto();
+        testDto.setId(inputId);
+        testDto.setPwd(inputPwd);
+
+        assertTrue(staffService.validateStaffLogin(testDto));
     }
 }
