@@ -5,5 +5,5 @@ public class ValidationGroups {
     public interface PatternGroup {}
     public interface SizeGroup {}
     public interface IdCheckGroup {}
-//    public interface RegisterGroup {}
+    public interface LoginCheckGroup {}
 }

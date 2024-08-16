@@ -12,9 +12,9 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 public class StaffDto {
 
-    @NotBlank(message = "아이디는 필수입력 항목입니다.", groups = {ValidationGroups.IdCheckGroup.class, ValidationGroups.NotBlankGroup.class})
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "아이디는 영문대소문자와 숫자만 입력 가능합니다.", groups = {ValidationGroups.IdCheckGroup.class, ValidationGroups.PatternGroup.class})
-    @Size(min = 3, max = 20, message = "아이디는 최소 3자 이상, 20자 이하로 입력해주세요.", groups = {ValidationGroups.IdCheckGroup.class, ValidationGroups.SizeGroup.class})
+    @NotBlank(message = "아이디는 필수입력 항목입니다.", groups = {ValidationGroups.NotBlankGroup.class, ValidationGroups.IdCheckGroup.class, ValidationGroups.LoginCheckGroup.class})
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "아이디는 영문대소문자와 숫자만 입력 가능합니다.", groups = {ValidationGroups.PatternGroup.class, ValidationGroups.IdCheckGroup.class, ValidationGroups.LoginCheckGroup.class})
+    @Size(min = 3, max = 20, message = "아이디는 최소 3자 이상, 20자 이하로 입력해주세요.", groups = {ValidationGroups.SizeGroup.class, ValidationGroups.IdCheckGroup.class, ValidationGroups.LoginCheckGroup.class})
     String id; // 사번
 
     @NotBlank(message = "이름은 필수입력 항목입니다.", groups = ValidationGroups.NotBlankGroup.class)
@@ -26,9 +26,9 @@ public class StaffDto {
     @Pattern(regexp = "[0-9a-zA-Z]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식이 올바르지 않습니다.", groups = ValidationGroups.PatternGroup.class)
     String email; // 이메일
 
-    @NotBlank(message = "비밀번호는 필수입력 항목입니다.", groups = ValidationGroups.NotBlankGroup.class)
-    @Size(min = 8, max = 15, message = "비밀번호는 최소 8자 이상, 최대 15자 이하로 입력해주세요.", groups = ValidationGroups.SizeGroup.class)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+=]).+$", message = "비밀번호는 공백 없이 영문 대소문자, 숫자 최소 1개 이상 포함해야 합니다.", groups = ValidationGroups.PatternGroup.class)
+    @NotBlank(message = "비밀번호는 필수입력 항목입니다.", groups = {ValidationGroups.NotBlankGroup.class, ValidationGroups.LoginCheckGroup.class})
+    @ Size(min = 8, max = 20, message = "비밀번호는 최소 8자 이상, 최대 20자 이하로 입력해주세요.", groups = {ValidationGroups.SizeGroup.class, ValidationGroups.LoginCheckGroup.class})
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+=]).+$", message = "비밀번호는 공백 없이 영문 대소문자, 숫자 최소 1개 이상 포함해야 합니다.", groups = {ValidationGroups.PatternGroup.class, ValidationGroups.LoginCheckGroup.class})
     String pwd; // 비밀번호
 
     @NotBlank(message = "회사코드가 지정되지 않았습니다.", groups = ValidationGroups.NotBlankGroup.class)
