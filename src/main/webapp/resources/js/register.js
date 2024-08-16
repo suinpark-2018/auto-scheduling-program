@@ -1,3 +1,72 @@
+function checkIdFormat(inputValue) {
+    let pattern = new RegExp('^[A-Za-z0-9]+$')
+    let msg = document.getElementById('id-error-msg');
+
+    if (inputValue.length > 0 && inputValue.length < 3 || inputValue.length > 20) {
+        msg.innerHTML = "아이디는 3자 이상, 20자 이하로 입력해주세요.";
+    } else if(inputValue.length > 0 && !inputValue.match(pattern)) {
+        msg.innerHTML = "아이디는 영문자와 숫자만 사용 가능합니다."
+    } else {
+        msg.innerHTML = "";
+    }
+}
+
+function checkPwdLength() {
+    let pwd1 = document.getElementById('pwd1').value;
+    let msg = document.getElementById('pwd-length-error-msg');
+
+    if (pwd1.length > 0 && pwd1.length < 8 || pwd1.length > 15) {
+        msg.innerHTML = "비밀번호는 8자리 이상 20자리 이하로 입력해야 합니다."
+    } else {
+        msg.innerHTML = "";
+    }
+}
+
+function checkPwdMatch() {
+    let pwd1 = document.getElementById('pwd1').value;
+    let pwd2 = document.getElementById('pwd2').value;
+    let msg = document.getElementById('match-error-msg');
+
+    if (pwd1 !== pwd2) {
+        msg.innerHTML = "비밀번호가 일치하지 않습니다."
+    } else {
+        msg.innerHTML = "";
+    }
+}
+
+function checkNameFormat(inputValue) {
+    let pattern = new RegExp('^[a-zA-Z가-힣\\s]+$');
+    let msg = document.getElementById('name-error-msg');
+
+    if (inputValue.length > 0 && !inputValue.match(pattern)) {
+        msg.innerHTML = "이름은 공백을 포함한 한글과 영어로만 입력 가능합니다.";
+    } else {
+        msg.innerHTML = "";
+    }
+}
+
+function restrictToPhoneNumbers(inputValue) {
+    let pattern = new RegExp('^[0-9]+$');
+    let msg = document.getElementById('mobile-number-error-msg');
+
+    if (inputValue.length > 0 && !inputValue.match(pattern)) {
+        msg.innerHTML = "휴대폰 번호는 숫자만 입력 가능합니다.";
+    } else {
+        msg.innerHTML = "";
+    }
+}
+
+function checkEmailFormat(inputValue) {
+    let pattern = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$')
+    let msg = document.getElementById('email-error-msg');
+
+    if(inputValue.length > 0 && !inputValue.match(pattern)) {
+        msg.innerHTML = "이메일 형식이 올바르지 않습니다.";
+    } else {
+        msg.innerHTML = "";
+    }
+}
+
 $(document).ready(function () {
     // 아이디 중복 확인
     $("#checkDuplicateBtn").click(function () {
@@ -76,5 +145,4 @@ $(document).ready(function () {
         })
 
     })
-
 });

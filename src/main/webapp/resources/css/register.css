@@ -12,7 +12,7 @@ body {
 
 .header {
     width: 100%;
-    margin-bottom: 10px;
+    margin: 25px 0;
     font-size: 40px;
     font-weight: bold;
     display: flex;
@@ -45,6 +45,11 @@ td {
 
 td:first-of-type {
     font-weight: bold;
+    padding-left: 25px;
+}
+
+td:nth-of-type(2) {
+    padding-left: 20px;
 }
 
 td:nth-of-type(3) {
@@ -56,7 +61,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="date"] {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     font-size: 14px;
     border-radius: 4px;
@@ -92,7 +97,7 @@ button {
     transition: background-color 0.3s ease;
     height: 40px; /* 고정 높이 설정 */
     float: right;
-    margin: 20px 10px 20px 10px;
+    margin: 17px 0 20px 10px;
 }
 
 button[type="button"] {
@@ -107,6 +112,7 @@ button[type="button"]:hover {
 button[type="submit"] {
     background-color: #007BFF;
     color: #fff;
+    margin-right: 25px;
 }
 
 button[type="submit"]:hover {
@@ -131,10 +137,9 @@ button:disabled {
 
 #id-msg {
     font-size: 15px;
-    min-height: 20px; /* 최소 높이 설정 */
     display: flex;
-    justify-content: center;
     align-items: center;
+    margin: 3px 0 0 3px;
 }
 
 #id-msg.success-msg {
@@ -143,4 +148,12 @@ button:disabled {
 
 #id-msg.duplicate-msg {
     color: #dc3545;
+}
+
+#id-error-msg, #pwd-length-error-msg, #match-error-msg, #name-error-msg, #mobile-number-error-msg, #email-error-msg {
+    font-size: 15px;
+    display: flex;
+    align-items: flex-end;
+    color: #dc3545;
+    margin: 3px 0 0 3px;
 }

@@ -9,11 +9,12 @@
     <div class="header"><p>회원가입</p></div>
         <form action="/register/info" method="post">
             <table class="input-group">
-                <p id="id-msg"></p>
                 <tr>
                     <td>아이디</td>
                     <td>
-                        <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요.">
+                        <input type="text" id="id" name="id" oninput="checkIdFormat(this.value)" placeholder="아이디를 입력해주세요.">
+                        <p id="id-msg"></p>
+                        <p id="id-error-msg"></p>
                     </td>
                     <td>
                         <button type="button" id="checkDuplicateBtn">중복확인</button>
@@ -21,11 +22,19 @@
                 </tr>
                 <tr>
                     <td>비밀번호</td>
-                    <td><input type="password" name="pwd" placeholder="비밀번호를 입력해주세요.(영문 대문자 또는 특수문자 포함)"></td>
+                    <td>
+                        <input type="password" id="pwd1" name="pwd" oninput="checkPwdLength()" placeholder="비밀번호를 입력해주세요.(영문 대문자 또는 특수문자 포함)">
+                        <p id="pwd-length-error-msg"></p>
+                        <input type="password" id="pwd2" name="pwd" oninput="checkPwdMatch()" placeholder="비밀번호를 다시 입력해주세요.">
+                        <p id="match-error-msg"></p>
+                    </td>
                 </tr>
                 <tr>
                     <td>이름</td>
-                    <td><input type="text" name="name" placeholder="이름을 입력해주세요."></td>
+                    <td>
+                        <input type="text" name="name" oninput="checkNameFormat(this.value)" placeholder="이름을 입력해주세요.">
+                        <p id="name-error-msg"></p>
+                    </td>
                 </tr>
                 <tr>
                     <td>성별</td>
@@ -44,11 +53,17 @@
                 </tr>
                 <tr>
                     <td>E-mail</td>
-                    <td><input type="email" name="email"></td>
+                    <td>
+                        <input type="email" name="email" oninput="checkEmailFormat(this.value)">
+                        <p id="email-error-msg"></p>
+                    </td>
                 </tr>
                 <tr>
                     <td>휴대폰번호</td>
-                    <td><input type="text" name="phone_num"></td>
+                    <td>
+                        <input type="text" name="phone_num" oninput="restrictToPhoneNumbers(this.value)">
+                        <p id="mobile-number-error-msg"></p>
+                    </td>
                 </tr>
                 <tr>
                     <td>소속 회사</td>
