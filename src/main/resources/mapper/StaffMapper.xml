@@ -23,9 +23,16 @@
     </insert>
 
     <!-- 특정 직원 정보 조회 -->
+    <!-- 아이디로 조회 -->
     <select id="select" parameterType="String" resultType="StaffDto">
         SELECT * FROM staff
         WHERE id = #{id}
+    </select>
+
+    <!-- 이메일로 조회 -->
+    <select id="selectByEmail" parameterType="String" resultType="StaffDto">
+        SELECT * FROM staff
+        WHERE email = #{email}
     </select>
 
     <!-- 전체 직원 정보 조회 -->
