@@ -36,19 +36,19 @@ class StaffDaoTest {
     @BeforeEach
     void setUpDB() throws Exception {
         for (int i = 1; i <= 10; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001",  "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto("staff" + i, "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE01", "3", "Staff", "N", "WS0001",  "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
         for (int i = 11; i <= 20; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE02", "4", "Staff", "N", "WS0001",  "Y", "2021-03-02", "1999-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto("staff" + i, "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO01", "DE02", "4", "Staff", "N", "WS0001",  "Y", "2021-03-02", "1999-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
         for (int i = 21; i <= 30; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE03", "5", "Staff", "N", "WS0001",  "Y", "2020-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto("staff" + i, "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE03", "5", "Staff", "N", "WS0001",  "Y", "2020-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
         for (int i = 31; i <= 40; i++) {
-            StaffDto testDto = new StaffDto(i + "", "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE04", "7", "Charge", "N", "WS0001",  "Y", "2018-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
+            StaffDto testDto = new StaffDto("staff" + i, "name" + i, "test" + i + "@spring.co.kr", "password" + i, "CO02", "DE04", "7", "Charge", "N", "WS0001",  "Y", "2018-03-02", "1998-04-03", "M", "010-1234-5678", "서울시 강남구 영동대로");
             staffDao.insert(testDto);
         }
     }
@@ -562,5 +562,36 @@ class StaffDaoTest {
         when(mockDao.deleteAll()).thenThrow(new DataAccessException("Database connection error!"){});
         // 설정된 예외 발생여부 확인
         assertThrows(DataAccessException.class, () -> mockDao.deleteAll());
+    }
+
+    @Test
+    @DisplayName("이메일로 직원 조회 성공")
+    void successToSelectByEmail() throws Exception {
+        // 기존에 셋팅된 데이터 활용하여 변수 ID, Email 선언 및 초기화
+        String inputEmail = "test1@spring.co.kr";
+        String staffId = "staff1";
+        StaffDto result = staffDao.selectByEmail(inputEmail);
+        // StaffDto 조회결과 확인
+        assertNotNull(result);
+        // Email 로 조회한 직원 정보에서 ID가 예상했던 결과와 일치하는지 확인
+        assertEquals(staffId, result.getId());
+    }
+
+    @Test
+    @DisplayName("이메일로 직원 조회 실패")
+    void failToSelectByEmail() throws Exception {
+        String wrongEmail = "wrong@example.com";
+        StaffDto result = staffDao.selectByEmail(wrongEmail);
+        assertNull(result);
+    }
+
+    @Test
+    @DisplayName("DB 연결 실패로 인한 이메일로 직원 조회 실패")
+    void failToDBConnection_selectByEmail() throws Exception {
+        // selectByEmail() 호출 시 DB 접근 예외 발생시킴
+        String inputEmail = "test1@spring.co.kr";
+        when(mockDao.selectByEmail(inputEmail)).thenThrow(new DataAccessException("Database connection error!"){});
+        // 설정된 예외 발생여부 확인
+        assertThrows(DataAccessException.class, () -> mockDao.selectByEmail(inputEmail));
     }
 }
