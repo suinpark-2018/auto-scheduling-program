@@ -2,6 +2,8 @@ package com.schedule.service;
 
 import com.schedule.dto.StaffDto;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface StaffService {
     // 1. 회원가입
     // 1.1. 직원정보 저장
@@ -25,4 +27,18 @@ public interface StaffService {
     // 2.1.1.1. 해당 ID 존재하면, PWD 비교하여 일치하면 true 반환
     // 2.1.1.2. 해당 ID 존재하지 않거나, PWD 일치하지 않으면 false 반환
     boolean validateStaffLogin(StaffDto staffDto);
+
+    // 특정 직원 정보 조회
+    // 특정 ID로 조회된 Staff 정보
+    StaffDto getStaffInfo(String id);
+
+    // 4. 이메일 본인 인증
+    // 4.1. 메일 전송
+    // 4.1.1. 사용자가 입력한 이메일 중복 여부 확인
+    // 4.1.1.1. 중복되지 않은 이메일인 경우, 메일 전송 및 true 반환
+    // 4.1.1.2. 중복된 이메일인 경우, false 반환
+    boolean sendVerificationEmail(String email, String savedMailKey);
+    // 중복되지 않은 인증번호 생성하여 반환
+    String makeVerificationCode(String savedMailKey, String newMailKey);
+
 }

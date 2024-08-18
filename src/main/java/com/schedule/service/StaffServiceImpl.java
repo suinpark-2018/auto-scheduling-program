@@ -2,6 +2,8 @@ package com.schedule.service;
 
 import com.schedule.dao.StaffDaoImpl;
 import com.schedule.dto.StaffDto;
+import com.schedule.service.mail.MailSender;
+import com.schedule.service.mail.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 public class StaffServiceImpl implements StaffService {
     private final StaffDaoImpl staffDao;
     private final BCryptPasswordEncoder passwordEncoder;
+    private MailSender mailSender;
+    private final MailService mailService;
 
     // 1. 회원가입
     // 1.1. 직원정보 저장
@@ -102,4 +106,57 @@ public class StaffServiceImpl implements StaffService {
     public boolean authenticatePwd(String rawPwd, String encodedPwd) {
         return passwordEncoder.matches(rawPwd, encodedPwd);
     }
+
+    // 3. 특정 직원 정보 조회
+    // 3.1. 특정 ID로 조회된 Staff 정보
+    @Override
+    public StaffDto getStaffInfo(String id) {
+        StaffDto staffDto = new StaffDto();
+        try {
+            staffDto = staffDao.select(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return staffDto;
+    }
+
+    // 4. 이메일 본인 인증
+    // 4.1. 메일 전송
+    // 4.1.1. 사용자가 입력한 이메일 중복 여부 확인
+    // 4.1.1.1. 중복되지 않은 이메일인 경우, 메일 전송 및 true 반환
+    // 4.1.1.2. 중복된 이메일인 경우, false 반환
+    @Override
+    public boolean sendVerificationEmail(String email, String mailKey) {
+        boolean successToSend = true;
+        try {
+            if (staffDao.selectByEmail(email) == null) {
+                mailService.send(email, mailKey);
+            } else {
+                successToSend = false;
+            }
+        } catch (Exception e) {
+            successToSend = false;
+            e.printStackTrace();
+            e.getMessage();
+        }
+
+        return successToSend;
+    }
+
+    // 중복되지 않은 인증번호 생성하여 반환
+    @Override
+    public String makeVerificationCode(String savedMailKey, String newMailKey) {
+        // 새로운 인증번호가 세션에 저장되어 있던 인증번호와 동일한 경우
+        // 인증번호 다시 생성
+        while (savedMailKey != null) {
+            if (newMailKey.equals(savedMailKey)) {
+                newMailKey = mailService.makeRandomMailKey();
+            } else {
+                break;
+            }
+        }
+        return newMailKey;
+    }
+
 }
