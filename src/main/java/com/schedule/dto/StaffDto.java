@@ -22,8 +22,8 @@ public class StaffDto {
     @Pattern(regexp = "^[a-zA-Z가-힣\\s]+$", message = "이름은 영문과 한글만 입력 가능합니다.", groups = ValidationGroups.PatternGroup.class)
     String name; // 직원명
 
-    @NotBlank(message = "이메일은 필수입력 항목입니다.", groups = ValidationGroups.NotBlankGroup.class)
-    @Pattern(regexp = "[0-9a-zA-Z]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식이 올바르지 않습니다.", groups = ValidationGroups.PatternGroup.class)
+    @NotBlank(message = "이메일은 필수입력 항목입니다.", groups = {ValidationGroups.NotBlankGroup.class, ValidationGroups.EmailCheckGroup.class})
+    @Pattern(regexp = "[0-9a-zA-Z]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", message = "이메일 형식이 올바르지 않습니다.", groups = {ValidationGroups.NotBlankGroup.class, ValidationGroups.EmailCheckGroup.class})
     String email; // 이메일
 
     @NotBlank(message = "비밀번호는 필수입력 항목입니다.", groups = {ValidationGroups.NotBlankGroup.class, ValidationGroups.LoginCheckGroup.class})
