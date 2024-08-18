@@ -6,4 +6,5 @@ public class ValidationGroups {
     public interface SizeGroup {}
     public interface IdCheckGroup {}
     public interface LoginCheckGroup {}
+    public interface EmailCheckGroup {}
 }

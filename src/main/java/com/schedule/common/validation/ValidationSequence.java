@@ -4,7 +4,7 @@ import javax.validation.GroupSequence;
 
 import static com.schedule.common.validation.ValidationGroups.*;
 
-@GroupSequence({ NotBlankGroup.class, SizeGroup.class, PatternGroup.class, IdCheckGroup.class })
+@GroupSequence({ NotBlankGroup.class, SizeGroup.class, PatternGroup.class })
 public interface ValidationSequence {
 
 }
