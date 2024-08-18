@@ -6,8 +6,7 @@ body, h2, p, input, button {
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
-    color: #333;
+    background-color: #f4f4f4;
 }
 
 .header {
@@ -26,6 +25,7 @@ body {
     margin: 50px auto;
     padding: 20px;
     background: #fff;
+    border: 1px solid gray;
     border-radius: 2px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
@@ -110,13 +110,13 @@ button[type="button"]:hover {
 }
 
 button[type="submit"] {
-    background-color: #007BFF;
+    background-color: #f44336;
     color: #fff;
     margin-right: 25px;
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #d32f2f;
 }
 
 button:disabled {
@@ -125,7 +125,11 @@ button:disabled {
 }
 
 #checkDuplicateBtn {
-    background-color: #007BFF;
+    background-color: #f44336;
+}
+
+#checkDuplicateBtn:hover {
+    background-color: #d32f2f;
 }
 
 .button-group {

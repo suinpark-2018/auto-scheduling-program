@@ -10,7 +10,7 @@
     <div class="wrapper">
         <h2>교대근무 일정 생성 프로그램</h2>
         <div class="button-container">
-            <button class="register-btn" onclick="location.href='/register/form'">SIGN UP</button>
+            <button class="register-btn" onclick="location.href='/register/verification'">SIGN UP</button>
             <button class="login-btn" onclick="location.href='/login/form'">LOGIN</button>
         </div>
     </div>

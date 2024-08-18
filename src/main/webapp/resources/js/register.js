@@ -107,6 +107,7 @@ $(document).ready(function () {
         });
     });
 
+    // 회원가입 정보 전송
     $("#sendUserInfoBtn").click(function (e) {
         e.preventDefault();
 
@@ -126,7 +127,7 @@ $(document).ready(function () {
                if (response.status === "success") {
                    console.log("회원가입 성공: ", response)
                    alert(response.message);
-                   window.location.href = "/"; // 메인 페이지로 이동
+                   window.location.href = "/login/form"; // 로그인 페이지로 이동
                } else if (response.status === "error") {
                    console.log("회원가입 실패: ", response)
                    alert(response.message);
