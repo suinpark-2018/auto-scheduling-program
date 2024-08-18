@@ -38,9 +38,15 @@ public class StaffDaoImpl implements StaffDao {
     }
 
     // 1.2. 특정 직원 정보 조회
+    // 1.2.1. 아이디로 조회
     @Override
     public StaffDto select(String id) throws Exception {
         return session.selectOne(namespace + "select", id);
+    }
+    // 1.2.2. 이메일로 조회
+    @Override
+    public StaffDto selectByEmail(String email) throws Exception {
+        return session.selectOne(namespace + "selectByEmail", email);
     }
 
     // 1.2. 전체 직원 정보 조회
