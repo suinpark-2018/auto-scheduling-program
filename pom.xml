@@ -177,6 +177,21 @@
       <version>5.8.12</version>
     </dependency>
 
+    <!-- Java 이메일 인증 API -->
+    <!-- mail -->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.7</version>
+    </dependency>
+
+    <!-- smtp -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+      <version>2.0.1.RELEASE</version>
+    </dependency>
+
   </dependencies>
 
   <!-- build -->
