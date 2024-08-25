@@ -43,7 +43,7 @@
     <!-- 특정 직원 정보 수정 -->
     <update id="update" parameterType="StaffDto">
         UPDATE staff
-        SET corp_code = #{corp_code}, depart_code = #{depart_code}, grade = #{grade}, work_state_code = #{work_state_code}, phone_num = #{phone_num}, up_id = #{id}, up_date = NOW()
+        SET pwd = #{pwd}, corp_code = #{corp_code}, depart_code = #{depart_code}, grade = #{grade}, work_state_code = #{work_state_code}, phone_num = #{phone_num}, up_id = #{id}, up_date = NOW()
         WHERE id = #{id}
     </update>
 
