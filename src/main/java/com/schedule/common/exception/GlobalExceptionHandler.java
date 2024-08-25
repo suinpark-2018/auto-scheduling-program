@@ -7,9 +7,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -18,15 +15,13 @@ public class GlobalExceptionHandler {
     // MethodArgumentNotValidException을 처리하는 메서드
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException e) {
-        Map<String, String> errors = new HashMap<>();
+//        Map<String, String> errors = new HashMap<>();
+        FieldError fieldError = e.getBindingResult().getFieldError();
+        if (fieldError != null) {
+            return new ResponseEntity<>(fieldError.getDefaultMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("유효성 검사 오류가 발생했습니다.", HttpStatus.BAD_REQUEST);
 
-        // 필드별로 오류 메시지를 추출
-        e.getBindingResult()
-                .getAllErrors()
-                .forEach(error -> errors.put(((FieldError) error).getField(), error.getDefaultMessage()));
-
-        // 400 Bad Request와 함께 오류 메시지를 반환
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BindException.class)
