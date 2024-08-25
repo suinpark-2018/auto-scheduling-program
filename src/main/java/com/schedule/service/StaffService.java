@@ -41,4 +41,12 @@ public interface StaffService {
     // 중복되지 않은 인증번호 생성하여 반환
     String makeVerificationCode(String savedMailKey, String newMailKey);
 
+    // 5. 아이디 찾기
+    // 5.1. 사용자가 입력한 아이디로 조회된 정보 확인
+    String findIdByEmail(String email);
+
+    // 5.2. 비밀번호 찾기
+    // 5.2.1. 사용자가 입력한 아이디와 이메일로 조회한 정보를 비교 및 확인
+    // 5.2.2. 새로운 비밀번호로 변경
+    boolean modifyPassword(String id, String pwd);
 }
