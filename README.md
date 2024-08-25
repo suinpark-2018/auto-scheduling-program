@@ -67,39 +67,94 @@
 ## 🏗 Project Structure
 ```
 schd
-  ├── README.md
-  ├── pom.xml
-  └── src
-      ├── main
-      │   ├── java
-      │   │   └── com
-      │   │       └── schedule
-      │   │             ├── controller
-      │   │             │   └── TestController.java
-      │   │             ├── dao
-      │   │             │   ├── TestDao.java
-      │   │             │   └── TestDaoImpl.java
-      │   │             ├── domain
-      │   │             │   └── CategoryDto.java
-      │   │             └── service
-      │   │                 ├── TestService.java
-      │   │                 └── TestServiceImpl.java
-      │   ├── resources
-      │   │   ├── mapper
-      │   │   │   └── TestMapper.xml
-      │   │   └── mybatis-config.xml
-      │   └── webapp
-      │       ├── WEB-INF
-      │       │   ├── spring
-      │       │   │   ├── appServlet
-      │       │   │   │   └── servlet-context.xml
-      │       │   │   └── root-context.xml
-      │       │   ├── views
-      │       │   │   └── index.jsp
-      │       │   └── web.xml
-      │       └── resources
-      └── test
-
+├── README.md
+├── pom.xml
+├── schd.iml
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── schedule
+│   │   │           ├── common
+│   │   │           │   ├── exception
+│   │   │           │   │   └── GlobalExceptionHandler.java
+│   │   │           │   ├── message
+│   │   │           │   └── validation
+│   │   │           │       ├── ValidationGroups.java
+│   │   │           │       └── ValidationSequence.java
+│   │   │           ├── config
+│   │   │           │   └── SecurityConfig.java
+│   │   │           ├── controller
+│   │   │           │   ├── FindIdPwdController.java
+│   │   │           │   ├── LoginController.java
+│   │   │           │   └── SignUpController.java
+│   │   │           ├── dao
+│   │   │           │   ├── StaffDao.java
+│   │   │           │   └── StaffDaoImpl.java
+│   │   │           ├── dto
+│   │   │           │   ├── BoardDto.java
+│   │   │           │   ├── CommonCodeDto.java
+│   │   │           │   ├── CommonCodeTypeDto.java
+│   │   │           │   ├── DutyExchReqDto.java
+│   │   │           │   ├── DutyExchReqHistDto.java
+│   │   │           │   ├── ShiftSchdArchDto.java
+│   │   │           │   ├── ShiftSchdDto.java
+│   │   │           │   ├── StaffDto.java
+│   │   │           │   └── StaffInfoChgHistDto.java
+│   │   │           └── service
+│   │   │               ├── StaffService.java
+│   │   │               ├── StaffServiceImpl.java
+│   │   │               └── mail
+│   │   │                   ├── MailHandler.java
+│   │   │                   ├── MailSender.java
+│   │   │                   ├── MailService.java
+│   │   │                   ├── MockMailSender.java
+│   │   │                   └── TempKey.java
+│   │   ├── resources
+│   │   │   ├── application.properties
+│   │   │   ├── mapper
+│   │   │   │   ├── StaffInfoChgHistMapper.xml
+│   │   │   │   └── StaffMapper.xml
+│   │   │   └── mybatis-config.xml
+│   │   └── webapp
+│   │       ├── WEB-INF
+│   │       │   ├── spring
+│   │       │   │   ├── appServlet
+│   │       │   │   │   └── servlet-context.xml
+│   │       │   │   └── root-context.xml
+│   │       │   ├── views
+│   │       │   │   ├── findIdPwd.jsp
+│   │       │   │   ├── identityVerification.jsp
+│   │       │   │   ├── index.jsp
+│   │       │   │   ├── login.jsp
+│   │       │   │   ├── main.jsp
+│   │       │   │   ├── modifyPwd.jsp
+│   │       │   │   └── register.jsp
+│   │       │   └── web.xml
+│   │       └── resources
+│   │           ├── css
+│   │           │   ├── findIdPwd.css
+│   │           │   ├── identityVerification.css
+│   │           │   ├── index.css
+│   │           │   ├── login.css
+│   │           │   ├── main.css
+│   │           │   ├── modifyPwd.css
+│   │           │   └── register.css
+│   │           ├── img
+│   │           └── js
+│   │               ├── findIdPwd.js
+│   │               ├── identityVerification.js
+│   │               ├── login.js
+│   │               ├── main.js
+│   │               └── register.js
+│   └── test
+│       └── java
+│           └── com
+│               └── schedule
+│                   ├── dao
+│                   │   └── StaffDaoTest.java
+│                   └── service
+│                       └── StaffServiceImplTest.java
 ```
 
 </br>
