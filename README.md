@@ -1,6 +1,6 @@
 ## [Project - Spring Framework] Automatic Shift Scheduling Program
 #### [Placeholder Logo]
-<img src="https://github.com/user-attachments/assets/cdf4d6f7-a63d-4df8-834b-99b390a20828" alt="logo" width="200">  
+<img src="https://github.com/user-attachments/assets/a344cc44-d8ae-44de-bf60-5c0388844fdc" alt="logo" width="200">  
 
 </br></br>
 
