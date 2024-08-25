@@ -224,4 +224,54 @@ class StaffServiceImplTest {
 
         mailService.sendTestEmail(staffDto);
     }
+
+    @Test
+    @DisplayName("아이디 찾기 성공")
+    void successToFindId() {
+        String inputEmail = "test1@spring.co.kr";
+        String expectedId = "user1";
+
+        assertNotNull(staffService.findIdByEmail(inputEmail));
+        assertEquals(expectedId, staffService.findIdByEmail(inputEmail));
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 이메일 정보로 조회 시 아이디 찾기 실패")
+    void failToFindId() {
+        String inputEmail = "wrongEmail@spring.co.kr";
+        String expectedId = "user1";
+
+        assertTrue(staffService.findIdByEmail(inputEmail).isBlank());
+        assertNotEquals(expectedId, staffService.findIdByEmail(inputEmail));
+    }
+
+    @Test
+    @DisplayName("비밀번호 변경 성공")
+    void successToModifyPwd() {
+        String inputId = "user1";
+        String inputPwd = "NewPassword1@";
+        // 비밀번호 변경 전
+        StaffDto testDto = new StaffDto();
+        testDto.setId(inputId);
+        testDto.setPwd(inputPwd);
+        assertFalse(staffService.validateStaffLogin(testDto));
+        // 비밀번호 변경
+        assertTrue(staffService.modifyPassword(inputId, inputPwd));
+        // 비밀번호 변경 후
+        assertTrue(staffService.validateStaffLogin(testDto));
+    }
+
+    @Test
+    @DisplayName("잘못된 아이디로 인한 비밀번호 변경 실패")
+    void failToModifyPwd() {
+        String inputId = "wrongId";
+        String inputPwd = "NewPassword1@";
+        // 비밀번호 변경 전
+        StaffDto testDto = new StaffDto();
+        testDto.setId(inputId);
+        testDto.setPwd(inputPwd);
+        assertFalse(staffService.validateStaffLogin(testDto));
+        // 비밀번호 변경
+        assertFalse(staffService.modifyPassword(inputId, inputPwd));
+    }
 }
