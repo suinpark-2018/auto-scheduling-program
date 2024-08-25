@@ -13,6 +13,13 @@ body {
     height: 50%;
 }
 
+.additional-options {
+    display: flex;
+    font-size: 15px;
+    color: gray;
+    text-decoration: none;
+}
+
 .login-container {
     margin-top: 50px;
     background-color: white;

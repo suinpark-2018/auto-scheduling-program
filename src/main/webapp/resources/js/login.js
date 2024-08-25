@@ -1,3 +1,10 @@
+window.onload = function () {
+    let pwdUpdateState = $("#pwdUpdateState").val();
+    if (pwdUpdateState !== null && pwdUpdateState.length != '') {
+        alert(pwdUpdateState);
+    }
+}
+
 function validateForm() {
     const id = document.getElementById('id').value;
     const pwd = document.getElementById('pwd').value;
