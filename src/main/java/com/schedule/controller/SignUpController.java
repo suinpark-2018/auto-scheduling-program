@@ -24,7 +24,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SignUpController {
     private final StaffServiceImpl staffService;
-    private BCryptPasswordEncoder passwordEncoder;
     private final MailService mailService;
 
     @GetMapping("/verification")
@@ -46,10 +45,15 @@ public class SignUpController {
         String mailKey = staffService.makeVerificationCode(savedMailKey, newMailKey);
 
         try {
-            if (staffService.sendVerificationEmail(email, mailKey)) {
-                session.setAttribute("mailKey", mailKey); // 세션에 인증번호 저장
-                session.setMaxInactiveInterval(60); // 세션 만료 시간 설정(1분)
-                return new ResponseEntity<>("인증번호 전송 성공", HttpStatus.OK);
+            String selectedId = staffService.findIdByEmail(email);
+            if (selectedId.isEmpty() || selectedId.isEmpty()) {
+                if (staffService.sendVerificationEmail(email, mailKey)) {
+                    session.setAttribute("mailKey", mailKey); // 세션에 인증번호 저장
+                    session.setMaxInactiveInterval(60); // 세션 만료 시간 설정(1분)
+                    return new ResponseEntity<>("인증번호 전송 성공", HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>("인증번호 전송에 실패했습니다.", HttpStatus.BAD_REQUEST);
+                }
             } else {
                 return new ResponseEntity<>("해당 이메일은 이미 사용 중입니다.", HttpStatus.BAD_REQUEST);
             }
@@ -73,14 +77,14 @@ public class SignUpController {
 
         try {
             if (inputMailKey.equals(savedMailKey)) {
-                return new ResponseEntity<>("인증번호 전송 성공", HttpStatus.OK);
+                return new ResponseEntity<>("인증 성공했습니다.", HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("인증번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
-            return new ResponseEntity<>("인증번호 전송에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("인증 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

@@ -130,11 +130,7 @@ public class StaffServiceImpl implements StaffService {
     public boolean sendVerificationEmail(String email, String mailKey) {
         boolean successToSend = true;
         try {
-            if (staffDao.selectByEmail(email) == null) {
-                mailService.send(email, mailKey);
-            } else {
-                successToSend = false;
-            }
+            mailService.send(email, mailKey);
         } catch (Exception e) {
             successToSend = false;
             e.printStackTrace();
@@ -159,4 +155,44 @@ public class StaffServiceImpl implements StaffService {
         return newMailKey;
     }
 
+    // 5. 아이디, 비밀번호 찾기
+    // 5.1. 아이디 찾기
+    // 5.1.1. 사용자가 입력한 아이디로 조회된 정보 확인
+    // 5.1.2. 조회된 StaffDto 인스턴스에서 아이디 값 반환
+    @Override
+    public String findIdByEmail(String email) {
+        String userId = "";
+        try {
+            if (staffDao.selectByEmail(email) != null) {
+                userId = staffDao.selectByEmail(email).getId();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return userId;
+    }
+
+    // 5.2. 비밀번호 찾기
+    // 5.2.1. 사용자가 입력한 아이디와 이메일로 조회한 정보를 비교 및 확인
+    // 5.2.2. 새로운 비밀번호로 변경
+    @Override
+    public boolean modifyPassword(String id, String pwd) {
+        boolean successToModify = true;
+        try {
+            StaffDto staffDto = staffDao.select(id);
+            if (staffDto != null) {
+                String encodedPwd = passwordEncoder.encode(pwd);
+                staffDto.setPwd(encodedPwd);
+                staffDao.update(staffDto);
+            } else {
+                successToModify = false;
+            }
+        } catch (Exception e) {
+            successToModify = false;
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return successToModify;
+    }
 }

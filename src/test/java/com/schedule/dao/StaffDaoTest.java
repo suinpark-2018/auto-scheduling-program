@@ -206,7 +206,7 @@ class StaffDaoTest {
     @DisplayName("PK 중복인 경우 데이터 저장 실패 테스트")
     void failToInsert_DuplicatedPK() throws Exception {
         // 이미 테스트에 존재하는 정보가 저장된 테스트용 객체 testDto
-        StaffDto testDto = new StaffDto("1", "name1", "test" + 1 + "@spring.co.kr", "password" + 1, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
+        StaffDto testDto = new StaffDto("staff1", "name1", "test" + 1 + "@spring.co.kr", "password" + 1, "CO01", "DE01", "3", "Staff", "N", "WS0001", "Y", "2022-03-02", "2000-04-03", "F", "010-1234-5678", "서울시 강남구 영동대로");
         assertThrows(DuplicateKeyException.class, () -> staffDao.insert(testDto));
     }
 
@@ -232,14 +232,14 @@ class StaffDaoTest {
     @DisplayName("데이터 조회 성공")
     void successOfSelect() throws Exception {
         // 기존에 세팅해둔 데이터로 테스트 진행
-        StaffDto testDto1 = staffDao.select("1");
+        StaffDto testDto1 = staffDao.select("staff1");
         assertNotNull(testDto1);
         // DB 조회결과 상 원하는 값으로 조회된 것이 맞는지 확인
-        assertEquals("name1", staffDao.select("1").getName());
+        assertEquals("name1", staffDao.select("staff1").getName());
 
         // 40개의 데이터 조회 시도
         for (int i = 1; i <= 40 ; i++) {
-            StaffDto testDto2 = staffDao.select(i + "");
+            StaffDto testDto2 = staffDao.select("staff" + i);
             // 테스트 결과 확인
             assertNotNull(testDto2); // 데이터 조회 성공 여부 확인
             assertEquals("name" + i, testDto2.getName()); // 원하는 데이터로 조회되는지 확인
@@ -310,7 +310,7 @@ class StaffDaoTest {
     @DisplayName("데이터_회사코드 수정 성공")
     void successOfUpdate_corp() throws Exception {
         // 임의의 테스트용 객체
-        String testId = "1";
+        String testId = "staff1";
         StaffDto testDto = staffDao.select(testId);
 
         // 변경할 회사코드
@@ -328,7 +328,7 @@ class StaffDaoTest {
     @DisplayName("데이터_부서코드 수정 성공")
     void successOfUpdate_depart() throws Exception {
         // 임의의 테스트용 객체
-        String testId = "1";
+        String testId = "staff1";
         StaffDto testDto = staffDao.select(testId);
 
         // 변경할 부서코드
@@ -346,7 +346,7 @@ class StaffDaoTest {
     @DisplayName("데이터_직급 수정 성공")
     void successOfUpdate_grade() throws Exception {
         // 임의의 테스트용 객체
-        String testId = "1";
+        String testId = "staff1";
         StaffDto testDto = staffDao.select(testId);
 
         // 변경할 직급
@@ -364,7 +364,7 @@ class StaffDaoTest {
     @DisplayName("데이터_근무상태코드 수정 성공")
     void successOfUpdate_workState() throws Exception {
         // 임의의 테스트용 객체
-        String testId = "1";
+        String testId = "staff1";
         StaffDto testDto = staffDao.select(testId);
 
         // 변경할 근무상태코드
@@ -382,7 +382,7 @@ class StaffDaoTest {
     @DisplayName("데이터_휴대폰번호 수정 성공")
     void successOfUpdate_phoneNum() throws Exception {
         // 임의의 테스트용 객체
-        String testId = "1";
+        String testId = "staff1";
         StaffDto testDto = staffDao.select(testId);
 
         // 변경할 휴대폰번호
@@ -401,7 +401,7 @@ class StaffDaoTest {
     void failToUpdateCorpCode_TypeLengthError() throws Exception {
         // 잘못된 타입길이로 설정한 항목이 포함된 테스트용 객체 testDto
         // corp_code 컬럼의 타입 길이는 varchar(10)으로 설정되어 있으며, 그 이상의 데이터 저장 시도 시 관련 예외 발생하는지 확인
-        String testId = "1";
+        String testId = "staff1";
         String testCorpCode = "CO123456789";
         StaffDto testDto = staffDao.select(testId);
         testDto.setCorp_code(testCorpCode);
@@ -414,7 +414,7 @@ class StaffDaoTest {
     void failToUpdateDepartCode_TypeLengthError() throws Exception {
         // 잘못된 타입길이로 설정한 항목이 포함된 테스트용 객체 testDto
         // depart_code 컬럼의 타입 길이는 varchar(10)으로 설정되어 있으며, 그 이상의 데이터 저장 시도 시 관련 예외 발생하는지 확인
-        String testId = "1";
+        String testId = "staff1";
         String testDepartCode = "DE123456789";
         StaffDto testDto = staffDao.select(testId);
         testDto.setDepart_code(testDepartCode);
@@ -427,7 +427,7 @@ class StaffDaoTest {
     void failToUpdateGrade_TypeLengthError() throws Exception {
         // 잘못된 타입길이로 설정한 항목이 포함된 테스트용 객체 testDto
         // grade 컬럼의 타입 길이는 varchar(10)으로 설정되어 있으며, 그 이상의 데이터 저장 시도 시 관련 예외 발생하는지 확인
-        String testId = "1";
+        String testId = "staff1";
         String testGrade = "ChargeNurse";
         StaffDto testDto = staffDao.select(testId);
         testDto.setGrade(testGrade);
@@ -440,7 +440,7 @@ class StaffDaoTest {
     void failToUpdateWorkStateCode_TypeLengthError() throws Exception {
         // 잘못된 타입길이로 설정한 항목이 포함된 테스트용 객체 testDto
         // work_state_code 컬럼의 타입 길이는 varchar(10)으로 설정되어 있으며, 그 이상의 데이터 저장 시도 시 관련 예외 발생하는지 확인
-        String testId = "1";
+        String testId = "staff1";
         String testWorkStateCode = "WS020402040204";
         StaffDto testDto = staffDao.select(testId);
         testDto.setWork_state_code(testWorkStateCode);
@@ -453,7 +453,7 @@ class StaffDaoTest {
     void failToUpdatePhoneNum_TypeLengthError() throws Exception {
         // 잘못된 타입길이로 설정한 항목이 포함된 테스트용 객체 testDto
         // phone_num 컬럼의 타입 길이는 varchar(15)으로 설정되어 있으며, 그 이상의 데이터 저장 시도 시 관련 예외 발생하는지 확인
-        String testId = "1";
+        String testId = "staff1";
         String testWorkStateCode = "010-1234-1234-5678";
         StaffDto testDto = staffDao.select(testId);
         testDto.setPhone_num(testWorkStateCode);
@@ -464,7 +464,7 @@ class StaffDaoTest {
     @Test
     @DisplayName("DB 연결 실패로 인한 데이터 수정 실패")
     void failToDBConnection_update() throws Exception {
-        String testId = "1";
+        String testId = "staff1";
         String testCorp = "CO02";
         StaffDto testDto = staffDao.select(testId);
 
@@ -483,7 +483,7 @@ class StaffDaoTest {
     @DisplayName("데이터 삭제 성공")
     void successOfDelete() throws Exception {
         // 특정 데이터 존재여부 확인
-        String testId = "1";
+        String testId = "staff1";
 
         // 데이터 삭제 전
         assertNotNull(staffDao.select(testId));
@@ -506,7 +506,7 @@ class StaffDaoTest {
     @Test
     @DisplayName("존재하지 않는 데이터 삭제 시도한 경우 삭제 실패")
     void failToDelete_nonexistData() throws Exception {
-        String testId = "1";
+        String testId = "staff1";
         assertNotNull(staffDao.select(testId));
 
         assertEquals(1, staffDao.delete(testId));
@@ -520,7 +520,7 @@ class StaffDaoTest {
     @Test
     @DisplayName("DB 연결 실패로 인한 데이터 삭제 실패")
     void failToDBConnection_delete() throws Exception {
-        String testId = "1";
+        String testId = "staff1";
 
         // delete() 호출 시 DB 접근 예외 발생시킴
         when(mockDao.delete(testId)).thenThrow(new DataAccessException("Database connection error!"){});
