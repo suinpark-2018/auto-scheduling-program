@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.schedule.dao.StaffDao">
+    <!-- 현재 시간 -->
+    <select id="now" resultType="String">
+        SELECT NOW()
+    </select>
+
+    <!-- 직원 수 -->
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM staff
+    </select>
+
+    <!-- 직원 정보 저장 -->
+    <insert id="insert" parameterType="StaffDto">
+        INSERT INTO
+            staff (id, name, email, pwd, corp_code, depart_code, work_years, grade, preg_state, work_state_code, hire_date, birth, gender, phone_num, address, reg_id, reg_date)
+        VALUES (
+            #{id}, #{name}, #{email}, #{pwd}, #{corp_code}, #{depart_code}, #{work_years}, #{grade}, #{preg_state}, #{work_state_code}, STR_TO_DATE(#{hire_date}, '%Y-%m-%d'), STR_TO_DATE(#{birth}, '%Y-%m-%d'), #{gender}, #{phone_num}, #{address}, #{id}, Now()
+               )
+    </insert>
+
+    <!-- 특정 직원 정보 조회 -->
+    <!-- 아이디로 조회 -->
+    <select id="select" parameterType="String" resultType="StaffDto">
+        SELECT * FROM staff
+        WHERE id = #{id}
+    </select>
+
+    <!-- 이메일로 조회 -->
+    <select id="selectByEmail" parameterType="String" resultType="StaffDto">
+        SELECT * FROM staff
+        WHERE email = #{email}
+    </select>
+
+    <!-- 전체 직원 정보 조회 -->
+    <select id="selectAll" resultType="StaffDto">
+        SELECT * FROM staff
+    </select>
+
+    <!-- 특정 직원 정보 수정 -->
+    <update id="update" parameterType="StaffDto">
+        UPDATE staff
+        SET pwd = #{pwd}, corp_code = #{corp_code}, depart_code = #{depart_code}, grade = #{grade}, work_state_code = #{work_state_code}, phone_num = #{phone_num}, up_id = #{id}, up_date = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 특정 직원 정보 삭제 -->
+    <delete id="delete" parameterType="String">
+        DELETE FROM staff
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 전체 직원 정보 삭제 -->
+    <delete id="deleteAll">
+        DELETE FROM staff
+    </delete>
+</mapper>
